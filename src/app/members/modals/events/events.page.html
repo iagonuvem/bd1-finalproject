@@ -1,0 +1,84 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Eventos</ion-title>
+    <ion-icon class="btn-dismiss" (click)="dismissModal()" slot="end" name="close"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <form [formGroup]="eventsForm">
+      <ion-button expand="full" fill="clear" (click)="uploadFile()">
+        <ion-icon name="camera"></ion-icon>
+        Adicionar Imagem
+      </ion-button>
+      <p class="p-warn-img">*Utilizar imagens com proporções 1:1</p>
+      <ion-item *ngIf="imgBase64 != null">
+        <!-- <ion-label position="stacked">Arquivo</ion-label> -->
+        <!-- <ion-input type="file" (ionChange)="uploadFile($event)"></ion-input> -->
+        <div class="preview-img" > 
+          <img [src]="domSanitizer.bypassSecurityTrustUrl(imgBase64)" id="img" /> 
+        </div>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Endereço</ion-label>
+        <ion-input formControlName="location_text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Data</ion-label>
+        <ion-datetime formControlName="date" displayFormat="DD/MM" pickerFormat="DD MM" placeholder="Selecione a Data"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Hora</ion-label>
+        <ion-datetime formControlName="hour" displayFormat="HH:mm" pickerFormat="HH mm" placeholder="Selecione a Hora"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Titulo</ion-label>
+        <ion-input formControlName="title"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Resumo</ion-label>
+        <ion-input formControlName="short_desc"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Descrição</ion-label>
+        <ion-input formControlName="full_desc"></ion-input>
+      </ion-item>
+      <ion-button (click)="send()" [disabled]="!eventsForm.valid" size="large" expand="block">Salvar</ion-button>
+    </form>
+  </ion-card>
+
+  <ion-item lines="full">
+    <ion-label>
+      <h1>Eventos</h1>
+    </ion-label>
+  </ion-item>
+  <ion-item lines="none" *ngIf="events.length == 0 && !loadingEvents">
+    <ion-label class="lbl-warning">
+      Não há eventos cadastrados
+    </ion-label>
+  </ion-item>
+  <div class="loading-container" *ngIf="loadingEvents">
+    <div class="sk-chase">
+      <div class="sk-chase-dot"></div>
+      <div class="sk-chase-dot"></div>
+      <div class="sk-chase-dot"></div>
+      <div class="sk-chase-dot"></div>
+      <div class="sk-chase-dot"></div>
+      <div class="sk-chase-dot"></div>
+    </div>
+  </div>
+  <ion-list class="events-list">
+    <ion-item *ngFor="let e of events">
+      <ion-label>
+        <h2>{{e.title}}</h2>
+      </ion-label>
+      <ion-button fill="clear" (click)="edit(e)" slot="end">
+        Editar
+      </ion-button>
+      <ion-button fill="clear" slot="end" (click)="confirmDelete(e)">
+        Excluir
+      </ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>

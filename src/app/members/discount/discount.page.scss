@@ -1,0 +1,47 @@
+$bgPrimary: rgb(41, 183, 145);
+
+ion-header::after {
+  background-image: none;
+}
+
+.home
+{
+    //  --background: rgb(41, 183, 145);
+}
+.indique{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 65%;
+}
+.desc1{
+    color: black;    
+    font-size: 1em;
+    font-weight: 300;
+    padding: 1em;
+}
+.desc2{
+  color: black;
+  font-size: 0.7em;
+  text-align: center 
+}
+.code{
+  font-size: 26px;
+  font-weight: 700;
+  background: rgba(0, 0, 0, 0.1);
+  padding: 0.5em 0em 0;
+  border-radius: 0.5em;
+  margin: 0 auto;
+  width: 60%;
+}
+.share{
+      //overflow: auto;
+      margin: auto;
+      top: 0; left: 0; bottom: 0; right: 0;
+}
+.btn-share{
+  position: absolute;
+  bottom: 1em;
+  left: 1%;
+  width: 97%;
+}

@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons class="btn-menu" slot="start">
+      <ion-menu-button color="primary"></ion-menu-button>
+    </ion-buttons>
+    <!-- <ion-title>Listening</ion-title> -->
+  </ion-toolbar>
+</ion-header>
+
+<div class="album-cover-inner" [style.background-image]="'url(' + album_cover + ')'" >
+  <!-- <img src="/assets/img/supersafari.jpg" alt="super safari" /> -->
+</div>
+<h1 class="ion-text-center album-title">{{album_name}}</h1>
+<ion-content class="bg-primary">
+  <div class="content-files">
+    <ion-list>
+      <ion-item *ngFor="let l of lessons" button (click)="play(l)" detail lines="full">
+        <ion-label>
+          <h2>{{l.title}}</h2>
+          <p>{{l.description}}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+  
+</ion-content>

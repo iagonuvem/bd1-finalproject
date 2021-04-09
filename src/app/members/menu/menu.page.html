@@ -1,0 +1,131 @@
+<ion-split-pane contentId="main-content">
+  <ion-menu contentId="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-avatar class="gravatar">
+          <img *ngIf="!userData['photo']" src="/assets/img/icon_user-circle.png">
+          <img *ngIf="userData['photo']" [src]="getImgBase64(userData['photo'])">
+        </ion-avatar>
+        <ion-button fill="clear" expand="full" size="small" (click)="editPhoto()">
+          Editar Foto
+        </ion-button>
+        <div class="ion-text-center nome">
+          <ion-label>{{userData["name"]}}</ion-label>
+        </div>
+        <!-- <div class="user-data" *ngIf="userDetails.current_class != ''">
+          <ion-label>{{userDetails.current_class}}</ion-label>
+          <ion-label>Sua Média: {{(userDetails.score_avg*100).toFixed()}}%</ion-label>
+          <ion-label>Situação Atual: {{userDetails.situation}}</ion-label>
+        </div> -->
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-item (click)="navigateMenu('home')" routerDirection="root"
+          [class.active-item]="SelectedPath === 'home'">
+          <ion-icon name="home" class="icons"></ion-icon> Início
+        </ion-item>
+        
+        <!-- <ion-item (click)="navigateMenu('discount')" routerDirection="root"
+          [class.active-item]="SelectedPath === 'discount'">
+          <ion-icon name="gift" class="icons"></ion-icon> Indique um Amigo
+        </ion-item>
+
+        <ion-item (click)="navigateMenu('premium')" routerDirection="root"
+          [class.active-item]="SelectedPath === 'premium'">
+          <ion-icon name="star" class="icons"></ion-icon> Seed Premium
+        </ion-item> -->
+
+        <ion-item (click)="modalFeedback()" routerDirection="root"
+          [class.active-item]="SelectedPath === 'premium'">
+          <ion-icon name="happy" class="icons"></ion-icon>Dê sua opinião
+        </ion-item>
+
+        <ion-item (click)="initWpp()" routerDirection="root">
+          <ion-icon name="microphone" class="icons"></ion-icon>
+           Fale Com a Seed
+        </ion-item>
+
+        <ion-item (click)="modalStudent()">
+          <ion-icon name="finger-print" class="icons"></ion-icon>
+           Alterar Meus Dados
+        </ion-item>
+
+        <ion-item (click)="modalNotification()" *ngIf="isCoordinator() || isAdmin()">
+          <ion-icon name="notifications" class="icons"></ion-icon>
+          Enviar Notificação
+        </ion-item>
+
+        <ion-item (click)="modalExercises()" *ngIf="isCoordinator() || isAdmin()">
+          <ion-icon name="book" class="icons"></ion-icon>
+          Gerenciar Exercícios
+        </ion-item>
+
+        <ion-item (click)="modalNews()" *ngIf="isCoordinator() || isAdmin()">
+          <ion-icon name="bookmarks" class="icons"></ion-icon>
+          Gerenciar Notícias
+        </ion-item>
+
+        <ion-item (click)="modalEvents()" *ngIf="isCoordinator() || isAdmin()">
+          <ion-icon name="ice-cream" class="icons"></ion-icon>
+          Gerenciar Eventos
+        </ion-item>
+
+        <ion-item (click)="logout()">
+          <ion-icon name="exit" class="icons"></ion-icon> 
+           Logout
+        </ion-item>
+
+        <ion-item lines="full" *ngIf="isAdmin()">
+          <h3>Acesso Restrito</h3>
+        </ion-item>
+        <ion-item (click)="modalSettings()" *ngIf="isAdmin()">
+          <ion-icon name="construct" class="icons"></ion-icon>
+          Configurações do App
+        </ion-item>
+        <!-- <ion-item (click)="modalCoordinators()" *ngIf="isAdmin()">
+          <ion-icon name="person" class="icons"></ion-icon>
+          Gerenciar Coordenadores
+        </ion-item> -->
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="main-content"></ion-router-outlet>
+</ion-split-pane>
+
+<ion-slides pager="true" [options]="slideOpts" *ngIf="showTutorial">
+  <ion-slide class="bg-white">
+    <p class="width100">
+      <img src="/assets/img/icon_tutorial.png" class="logo"/>
+    </p>
+    <h1>Bem vindo ao APP da Seed!</h1>
+    <p>
+      Por meio desse aplicativo, você poderá ficar por dentro de tudo que rola na escola, como suas listas de presenças, suas turmas, seus dados de pagamento e muito conteúdo para aprimorar o seu inglês. Deslize para o lado e descubra o app.
+    </p>
+    <ion-img src="/assets/img/swipe-horizontal.png" class="icon-swipe"></ion-img>
+    <ion-button fill="clear" size="large" expand="full" class="btn-skip" *ngIf="!firstLogin" (click)="skipTutorial()">Pular Tutorial</ion-button>
+  </ion-slide>
+
+  <ion-slide>
+    <div><p class="p-top bg-translucent p-fix">Nesse quadro navegue entre o nosso Instagram, suas notificações e suas notas</p></div>
+    <ion-img src="/assets/img/swipe-horizontal.gif" class="swipe-gif-top"></ion-img>
+  </ion-slide>
+
+  <ion-slide>
+    <p class="bg-translucent p-fix">Na parte inferior navegue pelas opções do app</p>
+    <ion-img src="/assets/img/swipe-horizontal.gif" class="swipe-gif"></ion-img>
+  </ion-slide>
+
+  <ion-slide>
+    <ion-img src="/assets/img/arrow.png" class="arrow"></ion-img>
+    <p class="bg-translucent p-fix">Esse botão revela um menu lateral com algumas opções, você pode acessa-lo de qualquer tela simplesmente deslizando o seu dedo</p>
+  </ion-slide>
+  
+  <ion-slide class="bg-white">
+    <h1>Tudo Pronto?</h1>
+    <p>Agora você ja sabe como utilizar o app! É só manter ele atualizado e ficar por dentro de tudo que rola na escola ;)</p>
+    <p class="width100">
+      <ion-button (click)="skipTutorial()">Começar</ion-button>
+    </p>
+  </ion-slide>
+</ion-slides>

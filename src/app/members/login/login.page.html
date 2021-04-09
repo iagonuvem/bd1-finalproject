@@ -1,0 +1,24 @@
+<div *ngIf="splash" class="splash">
+  <ion-img src="/assets/img/icon2.png"></ion-img>
+  <div class="spinner"></div>
+</div>
+
+<ion-content class="login">
+  <ion-grid>
+    <div class="ion-padding">
+      <h1>Selecione sua unidade</h1>
+    </div>
+    <div class="ion-padding">
+      <ion-button fill="outline" size="large" expand="block" class="config-naosou" (click)="goToPagePublic()">Não sou aluno</ion-button>
+    </div>
+    <div class="ion-padding">
+      <ion-button fill="outline" size="large" (click)="goUserType('jm')" expand="block">João Monlevade</ion-button>
+    </div>
+    <div class="ion-padding">
+      <ion-button fill="outline" size="large" (click)="goUserType('contagem')" expand="block">Contagem</ion-button>
+    </div>
+    <div class="ion-padding">
+      <ion-button fill="outline" size="large" (click)="goUserType('caratinga')" expand="block">Caratinga</ion-button>
+    </div>
+  </ion-grid>
+</ion-content>

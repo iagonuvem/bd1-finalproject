@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Gerenciar Exercícios</ion-title>
+    <ion-icon class="btn-dismiss" (click)="dismissModal()" slot="end" name="close"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <form [formGroup]="exercisesForm">
+      <ion-item>
+        <ion-label position="stacked">Tipo</ion-label>
+        <ion-select formControlName="level" placeholder="Selecione">
+          <ion-select-option value="1">Grammar</ion-select-option>
+          <ion-select-option value="2">Vocabulary</ion-select-option>
+          <ion-select-option value="3">Spelling</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Questão</ion-label>
+        <ion-input formControlName="statement"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Resposta Correta</ion-label>
+        <ion-input formControlName="correct_option"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Explicação</ion-label>
+        <ion-input formControlName="clarification"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Outras Respostas</ion-label>
+        <ion-input formControlName="other_option"></ion-input>
+        <ion-button size="small" fill="clear" slot="end" (click)="addOption()">Adicionar</ion-button>
+      </ion-item>
+      <ion-list *ngIf="options">
+        <ion-item lines="none" *ngFor="let o of options; let i = index">
+          {{o.desc}}
+          <ion-button (click)="removeOption(i)" fill="clear" size="small" slot="end">Remover</ion-button>
+        </ion-item>
+      </ion-list>
+      <ion-button (click)="save()" [disabled]="!exercisesForm.valid" size="small" expand="block">Salvar</ion-button>
+    </form>
+  </ion-card>
+
+  <ion-item>
+    <ion-label position="stacked">Filtrar Exercicios</ion-label>
+    <ion-select placeholder="Selecione" (ionChange)="filter($event)">
+      <ion-select-option value="1" selected>Grammar</ion-select-option>
+      <ion-select-option value="2">Vocabulary</ion-select-option>
+      <ion-select-option value="3">Spelling</ion-select-option>
+    </ion-select>
+  </ion-item>
+  
+  <div class="loading-container" *ngIf="loading">
+    <div class="sk-chase">
+      <div class="sk-chase-dot"></div>
+      <div class="sk-chase-dot"></div>
+      <div class="sk-chase-dot"></div>
+      <div class="sk-chase-dot"></div>
+      <div class="sk-chase-dot"></div>
+      <div class="sk-chase-dot"></div>
+    </div>
+  </div>
+  <ion-list>
+    <ion-item *ngFor="let e of exercises">
+      <ion-label>
+        <h2>{{e.statement}}</h2>
+      </ion-label>
+      <ion-button fill="clear" (click)="edit(e)" slot="end">
+        Editar
+      </ion-button>
+      <ion-button fill="clear" slot="end" (click)="confirmDelete(e)">
+        Excluir
+      </ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>

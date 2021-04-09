@@ -1,0 +1,125 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-img src="/assets/img/icon2.png" class="logohome"></ion-img>
+    <!-- <ion-title>Seed Idiomas</ion-title> -->
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding home">
+  <ion-slides class="slide-content" pager="true" [options]="slideOpts">
+    <!--<ion-slide class="box">
+      <ion-content class="bg-transparent">
+        <label>Instagram</label>
+      </ion-content>
+    </ion-slide> -->
+    <!--EDITAR CODIGO SLIDE 0 AQUI-->
+
+    <ion-slide class="box">
+      <ion-content class="bg-transparent">
+
+
+        <ion-item *ngFor="let feed of lista_feed" (click)="initInsta()">
+          <div *ngIf="feed.media_type == 'IMAGE'">
+            <img src="{{feed.media_url}}" class="tratar_img">
+          </div>
+          <div *ngIf="feed.media_type == 'VIDEO'">
+            <img src="{{feed.thumbnail_url}}" class="tratar_img">
+          </div>
+          <div *ngIf="feed.media_type == 'CAROUSEL_ALBUM'">
+            <img src="{{feed.media_url}}" class="tratar_img">
+          </div>
+        </ion-item>
+
+      </ion-content>
+    </ion-slide>
+    <!--EDITAR CODIGO SLIDE 1 AQUI-->
+    <ion-slide class="box" *ngIf="isStudent()">
+      <ion-content class="bg-transparent">
+        <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+          <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Arraste para baixo para atualizar"
+            refreshingSpinner="circles" refreshingText="Buscando novas notificações...">
+          </ion-refresher-content>
+        </ion-refresher>
+        <label *ngIf="notifications.length == 0">Não há novas notificações</label>
+        <ion-card *ngFor="let n of notifications; index as i" class="news-card">
+          <ion-item>
+            <ion-label>{{n.title}}</ion-label>
+            <ion-button fill="clear" slot="end" (click)="removeNotification(i)">
+              <ion-icon name="close"></ion-icon>
+            </ion-button>
+          </ion-item>
+
+          <ion-card-content>
+            {{n.msg}}
+          </ion-card-content>
+        </ion-card>
+      </ion-content>
+    </ion-slide>
+    <ion-slide class="box" *ngIf="isStudent()">
+      <!--EDITAR CODIGO SLIDE 2 AQUI-->
+      <ion-content class="bg-transparent">
+        <label>Situação: {{scores["situation"]}}</label>
+        <ion-list>
+          <ion-item *ngFor="let s of scores['grades']">
+            <ion-label>{{s.test_name}} ( {{s.score/s.maximum_value*100}}% )</ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-content>
+    </ion-slide>
+  </ion-slides>
+
+  <ion-slides class="slide-menu" [options]="slideOpts2">
+    <ion-slide (click)="navigate('news')" class="box2">
+      <ion-icon name="bookmarks" class="icons" size="large"></ion-icon>
+      <!--EDITAR CODIGO MENUSLIDE 1 AQUI-->
+      <label class="box2text">
+        Seed News
+      </label>
+    </ion-slide>
+    <ion-slide *ngIf="isStudent()" (click)="navigate('exercises')" class="box2">
+      <ion-icon name="book" class="icons" size="large"></ion-icon>
+      <!--EDITAR CODIGO MENUSLIDE 1 AQUI-->
+      <label class="box2text">
+        Exercícios
+      </label>
+    </ion-slide>
+    <ion-slide *ngIf="isStudent()" (click)="navigate('listening/albuns')" class="box2">
+      <ion-icon name="headset" class="icons" size="large"></ion-icon>
+      <label class="box2text">Listening</label>
+    </ion-slide>
+    <!-- <ion-slide (click)="navigate('premium')" class="box2">
+      <ion-icon name="star" class="icons" size="large"></ion-icon>
+      <label class="box2text">Seed Premium</label>
+    </ion-slide> -->
+    <ion-slide *ngIf="isStudent()" (click)="navigate('discount')" class="box2">
+      <ion-icon name="gift" class="icons" size="large"></ion-icon>
+      <label class="box2text">Indique um amigo</label>
+    </ion-slide>
+    <ion-slide *ngIf="isStudent() || isTeacher()" (click)="navigate('classes')" class="box2">
+      <ion-icon name="people" class="icons" size="large"></ion-icon>
+      <label class="box2text">Minhas Turmas</label>
+    </ion-slide>
+    <ion-slide (click)="navigate('events')" class="box2">
+      <ion-icon name="ice-cream" class="icons" size="large"></ion-icon>
+      <label class="box2text">Eventos</label>
+    </ion-slide>
+
+    <!-- <ion-slide (click)="navigate('store')" class="box2">
+      <ion-icon name="cart" class="icons" size="large"></ion-icon>
+      <label class="box2text">SeedStore</label>
+    </ion-slide> -->
+    <ion-slide (click)="navigate('tutoring')" class="box2">
+      <ion-icon name="school" class="icons" size="large"></ion-icon>
+      <!--EDITAR CODIGO MENUSLIDE 1 AQUI-->
+      <label class="box2text">
+        Ask Seed
+      </label>
+    </ion-slide>
+    <ion-slide *ngIf="isStudent()" (click)="navigate('financial')" class="box2">
+      <ion-icon name="card" class="icons" size="large"></ion-icon>
+      <label class="box2text">Financeiro</label>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

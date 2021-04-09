@@ -1,0 +1,99 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Notificações</ion-title>
+    <ion-icon class="btn-dismiss" (click)="dismissModal()" slot="end" name="close"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <form [formGroup]="notificationForm">
+      <!-- <ion-item>
+        <ion-label>Unidade:</ion-label>
+        <ion-select  formControlName="api_key" name="api_key" id="api_key" placeholder="Selecione">
+          <ion-select-option value="JM">João Monlevade</ion-select-option>
+          <ion-select-option value="Contagem">Contagem</ion-select-option>
+          <ion-select-option value="Contagem">Caratinga</ion-select-option>
+        </ion-select>
+      </ion-item> -->
+      <ion-item>
+        <ion-label position="stacked">Titulo</ion-label>
+        <ion-input formControlName="title"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Mensagem</ion-label>
+        <ion-input formControlName="msg"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Essa Mensagem é Recorrente?</ion-label>
+        <ion-select  formControlName="recurrent" name="recurrent" id="recurrent" placeholder="Selecione">
+          <ion-select-option value="false">Não</ion-select-option>
+          <ion-select-option value="true">Sim</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Data</ion-label>
+        <ion-datetime formControlName="date" displayFormat="DD/MM" pickerFormat="DD M" placeholder="Selecione a Data"></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Hora</ion-label>
+        <ion-datetime formControlName="time" displayFormat="H:m" placeholder="Selecione a hora"></ion-datetime>
+      </ion-item>
+
+      <ion-item *ngIf="notificationForm.controls.recurrent.value == 'true'">
+        <ion-label>Qual o tipo de Recorrencia?</ion-label>
+        <ion-select placeholder="Selecione" [(ngModel)]="recurrent.type" [ngModelOptions]="{standalone: true}">
+          <ion-select-option value="1">Data Fixa</ion-select-option>
+          <ion-select-option value="2">Periodicamente</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item *ngIf="recurrent.type == '2'">
+        <ion-label>Ocorre a cada:</ion-label>
+        <ion-select [(ngModel)]="recurrent.every" [ngModelOptions]="{standalone: true}" placeholder="Selecione">
+          <ion-select-option value="day">Dia</ion-select-option>
+          <ion-select-option value="week">Semana</ion-select-option>
+          <ion-select-option value="month">Mês</ion-select-option>
+          <ion-select-option value="quarter">Semestre</ion-select-option>
+          <ion-select-option value="year">Ano</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item *ngIf="notificationForm.controls.recurrent.value == 'true'">
+        <ion-label position="stacked">Número de Repetições</ion-label>
+        <ion-input [(ngModel)]="recurrent.count" [ngModelOptions]="{standalone: true}"></ion-input>
+      </ion-item>
+
+      <ion-button (click)="send()" [disabled]="!notificationForm.valid" size="large" expand="block">Salvar</ion-button>
+    </form>
+  </ion-card>
+
+  <ion-list class="notification-list">
+    <ion-item *ngFor="let n of notifications">
+      <ion-label>
+        <h2 *ngIf="!n.trigger || n.trigger.at != null || (n.trigger.every.month && n.trigger.every.day)">
+          <ion-icon name="calendar" slot="start"></ion-icon>
+          <strong>{{n.date | date : "dd/MM"}}</strong>  
+        </h2>
+        <h3 *ngIf="n.trigger">
+          <ion-icon name="repeat" ></ion-icon>
+          <span *ngIf="n.trigger.every.month && n.trigger.every.day">Na Data</span>
+          <span *ngIf="n.trigger.every == 'day'">Diariamente</span>
+          <span *ngIf="n.trigger.every == 'week'">Semanalmente</span>
+          <span *ngIf="n.trigger.every == 'month'">Mensalmente</span>
+          <span *ngIf="n.trigger.every == 'quarter'">Semestralmente</span>
+          <span *ngIf="n.trigger.every == 'year'">Anualmente</span>
+        </h3>
+        <h3>
+          {{n.title}}
+        </h3>
+        <p>{{n.msg}}</p>
+        <p>Criado por: {{n.author.name}}</p>
+      </ion-label>
+      <ion-button slot="end" fill="clear" (click)="confirmDelete(n)">
+        <ion-icon name="trash" slot="end"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>

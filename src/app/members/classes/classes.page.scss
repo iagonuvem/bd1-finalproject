@@ -1,0 +1,57 @@
+$fontColor: white;
+$bgPrimary: rgb(41, 183, 145);
+$bgSecondary: rgb(100, 200, 180);
+
+ion-toolbar{
+    background: $bgPrimary;
+}
+.default{
+    display: block;
+    padding: 4vw;
+    font-weight: 100;
+    text-align: center;
+    font-size: 1.25em;
+    margin-top: 55%;
+}
+.class-name{
+    display: block;
+    width: 100%;
+    padding: 3vh 1vh 1.5vh;
+    font-size: 3vh;
+    text-align: center;
+    background: rgb(41, 183, 145);
+    color: $fontColor;
+}
+.teacher-name{
+    background: rgb(41, 183, 145);
+    color: $fontColor;
+    display: block;
+    width: 100%;
+    padding: 0vh 1vh 3vh;
+    font-size: 3vh;
+    text-align: center;
+}
+.schedule{
+    display: block;
+    text-align: center;
+    width: 100%;
+    padding: 2vh;
+    font-size: 2vh;
+    margin: 3vh 0vh 0vh;
+    background: gainsboro;
+}
+.txt-members{
+    display: block;
+    width: 100%;
+    padding: 3vw;
+    font-size: 3vw;
+    text-align: left;
+}
+
+ion-list{
+    width: 100%;
+}
+ion-progress-bar{
+    padding: 2vh;
+    margin: 0 3vw
+}

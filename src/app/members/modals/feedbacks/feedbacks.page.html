@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-icon class="btn-dismiss" (click)="dismissModal()" slot="end" name="close"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="bg">
+  <ion-row class="ion-padding">
+    <ion-label class="description">Este é um app construido para você! Sua opinião nos ajuda a melhorar cada dia mais a sua experiência na escola, sinta-se a vontade para nos contar sobre o que achou do app! </ion-label>
+    <ion-item class="textarea-inner">
+      <ion-label position="floating" >Descreva aqui o que você achou do app...</ion-label>
+      <ion-textarea autoGrow="true" [(ngModel)]="msg" autofocus="true"></ion-textarea>
+    </ion-item>
+    <ion-button (click)="send()" class="btn-send" fill="outline" expand="full" size="large">Enviar Opinião</ion-button>
+  </ion-row>
+</ion-content>

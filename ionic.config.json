@@ -1,0 +1,7 @@
+{
+  "name": "Seed Idiomas",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

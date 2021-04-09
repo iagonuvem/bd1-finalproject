@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button color="primary"></ion-menu-button>
+    </ion-buttons>
+    <!-- <ion-title>Indique um amigo</ion-title> -->
+  </ion-toolbar>
+</ion-header>
+<ion-content class="home">
+  <ion-img src="/assets/img/indique.png" class="indique"></ion-img>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <div class="ion-text-center">
+          <h4>Olá {{firstName}}, tudo bem?</h4>
+          <p class="desc1">
+            Para cada amigo que se matrícular utilizando o seu código, você pode ganhar R$50,00
+          de desconto na proxima matrícula e ele R$100,00 para usar na taxa de matrícula.
+          </p>
+          <div class="code">
+            <ion-label>{{discountCode}}</ion-label>
+            <ion-button fill="clear" expand="block" (click)="copyCode(discountCode)">Copiar Código</ion-button>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-button class="btn-share" expand="block" size="large" (click)="shareActionSheet()">Compartilhar</ion-button>
+</ion-content>

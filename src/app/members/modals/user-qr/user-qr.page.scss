@@ -1,0 +1,25 @@
+.btn-dismiss{
+    padding: 1vh 3vw;
+    font-size: 2em;
+}
+ion-header::after {
+    background-image: none;
+}
+ion-content{
+    --background: rgb(41, 183, 145);
+}
+
+ion-card{
+    width: 100%;
+    ion-card-header{
+        background: white;
+        padding-top: 0;
+        text-align: center;
+    }
+}
+.personal-data{
+    ion-label{
+        width: 100%;
+        white-space: normal;
+    }
+}

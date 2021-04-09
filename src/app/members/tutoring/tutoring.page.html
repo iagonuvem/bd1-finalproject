@@ -1,0 +1,101 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons class="btn-menu" slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Ask Seed</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="bg-primary">
+    <ion-item lines="none" color="primary">
+      <h2 class="margin-0">Créditos: {{credits}}</h2>
+    </ion-item>
+    <!-- <ion-item class="item-round">
+      <ion-label>Selecione o Tutor</ion-label>
+      <ion-select value="null" okText="Okay" cancelText="Dismiss">
+        <ion-select-option value="iagonuvem@hotmail.com">Iago</ion-select-option>
+      </ion-select>
+    </ion-item> -->
+  </div>
+  <ion-segment (ionChange)="tutoringTypeChanged($event)" color="secondary">
+    <ion-segment-button value="new" checked>
+      <ion-label>Agendar</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="schedule">
+      <ion-label>Meus Agendamentos</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  <!-- Agendamento -->
+  <div *ngIf="activeTutoringType === 'new'">
+    <ion-row>
+      <ion-item lines="none">
+        <ion-label>
+          <p *ngIf="calendar.mode == 'month'">Selecione o dia que deseja agendar uma tutoria</p>
+          <p *ngIf="calendar.mode == 'day'">Selecione a hora que deseja agendar uma tutoria</p>
+        </ion-label>
+      </ion-item>
+      <ion-col size="12">
+        <h2 class="view-title">{{viewTitle}}</h2>
+      </ion-col>
+      <!-- <ion-col size="4">
+        <ion-button expand="full" fill="clear" [color]="calendar.mode == 'month' ? 'primary' : 'secondary'"
+          (click)="changeMode('month')">Mês</ion-button>
+      </ion-col>
+      <ion-col size="4">
+        <ion-button expand="full" fill="clear" [color]="calendar.mode == 'week' ? 'primary' : 'secondary'"
+          (click)="changeMode('week')">Semana</ion-button>
+      </ion-col>
+      <ion-col size="4">
+        <ion-button expand="full" fill="clear" [color]="calendar.mode == 'day' ? 'primary' : 'secondary'" (click)="changeMode('day')">
+          Dia</ion-button>
+      </ion-col>
+      <ion-col size="6" class="ion-text-left">
+        <ion-button fill="outline" (click)="back()">
+          <ion-icon name="arrow-dropleft"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col size="6" class="ion-text-right">
+        <ion-button fill="outline" (click)="next()">
+          <ion-icon name="arrow-dropright"></ion-icon>
+        </ion-button>
+      </ion-col> -->
+    </ion-row>
+    <div class="fix-height">
+      <calendar 
+      [eventSource]="eventSource" 
+      [calendarMode]="calendar.mode" 
+      [currentDate]="calendar.currentDate"
+      (onCurrentDateChanged)="onCurrentDateChanged($event)" 
+      (onRangeChanged)="reloadSource(startTime, endTime)"
+      (onEventSelected)="onEventSelected($event)" 
+      (onTitleChanged)="onViewTitleChanged($event)"
+      (onTimeSelected)="onTimeSelected($event)" 
+      [markDisabled]="markDisabled"
+      startHour="7"
+      endHour="21"
+      step="30" 
+      timeInterval="30"
+      startingDayWeek="1"
+      formatHourColumn="HH:mm">
+      </calendar>
+    </div>
+  </div>
+  
+  <!-- Agendamentos -->
+  <div *ngIf="activeTutoringType === 'schedule'" class="bg">
+    <ion-label class="default" *ngIf="gCalSchedule.length == 0">
+        Você não possui nenhum agendamento!
+    </ion-label>
+    <ion-list>
+      <ion-item *ngFor="let event of gCalSchedule" button (click)="tutoringDetail(event)" detail>
+        <ion-label>
+          <h2>{{event.start.dateTime | date : 'MMMM d, y, h:mm:ss a'}}</h2>
+          <p>Tutor: {{event.tutor.name}}</p>
+        </ion-label>
+      </ion-item>      
+    </ion-list>
+  </div>
+ 
+</ion-content>

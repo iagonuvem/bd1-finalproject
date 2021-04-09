@@ -1,0 +1,25 @@
+.bg{
+    --background: rgb(41, 183, 145);
+}
+.description{
+    color: white;
+    font-weight: 100;
+    text-align: center;
+    margin: 0.25em 0.25em 1em;
+    font-size: 1.25em;
+}
+.textarea-inner{
+    width: 100%;
+    border-radius: 1em;
+}
+.btn-send{
+    width:100%;
+    color: white;
+}
+.btn-dismiss{
+    padding: 1vh 3vw;
+    font-size: 2em;
+}
+ion-header::after {
+    background-image: none;
+}

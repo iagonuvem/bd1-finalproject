@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title *ngIf="!edit">Confirmar Agendamento de Tutoria</ion-title>
+    <ion-title *ngIf="edit">Detalhes de Tutoria</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label position="fixed">Data</ion-label>
+    <ion-input value="{{date.selectedTime | date : 'dd/MM/y'}}" readonly></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="fixed">Hora</ion-label>
+    <ion-input value="{{date.selectedTime | date : 'shortTime'}}" readonly></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="fixed">Tutor:</ion-label>
+    <ion-select *ngIf="!edit" interface="popover" [(ngModel)]="selectedTutor" placeholder="Selecione um tutor">
+      <ion-select-option *ngFor="let tutor of tutors" [value]="tutor">{{tutor.name}}</ion-select-option>
+    </ion-select>
+    <ion-input *ngIf="edit" value="{{selectedTutor.name}}" readonly></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="fixed">Descrição*</ion-label>
+    <ion-textarea rows="3" [(ngModel)]="description" placeholder="O que você gostaria de melhorar nessa tutoria?"></ion-textarea>
+  </ion-item>
+  <ion-row>
+    <ion-col size="12">
+      <ion-button *ngIf="!edit" size="large" expand="block" fill="clear" [disabled]="selectedTutor == null || description == ''" (click)="schedule()">
+        Confirmar
+      </ion-button>
+      <ion-button *ngIf="edit" size="large" expand="block" fill="clear" (click)="confirmCancel()">
+        Cancelar Agendamento
+      </ion-button>
+    </ion-col>
+    <ion-col size="12">
+      <ion-button expand="block" fill="clear" (click)="dismiss()">
+        Sair
+      </ion-button>
+    </ion-col>
+    
+  </ion-row>
+
+  
+</ion-content>

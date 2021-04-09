@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Notícias</ion-title>
+    <ion-icon class="btn-dismiss" (click)="dismissModal()" slot="end" name="close"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <form [formGroup]="newsForm">
+      <ion-button expand="full" fill="clear" (click)="uploadFile()">
+        <ion-icon name="camera"></ion-icon>
+        Adicionar Imagem
+      </ion-button>
+      <p class="p-warn-img">*Utilizar imagens com proporções 1:1</p>
+      <ion-item *ngIf="imgBase64 != null">
+        <!-- <ion-label position="stacked">Arquivo</ion-label> -->
+        <!-- <ion-input type="file" (ionChange)="uploadFile($event)"></ion-input> -->
+        <div class="preview-img" > 
+          <img [src]="domSanitizer.bypassSecurityTrustUrl(imgBase64)" id="img" /> 
+        </div>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Titulo</ion-label>
+        <ion-input formControlName="title"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Resumo</ion-label>
+        <ion-input formControlName="short_desc"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Descrição</ion-label>
+        <ion-input formControlName="full_desc"></ion-input>
+      </ion-item>
+      <ion-button (click)="send()" [disabled]="!newsForm.valid" size="large" expand="block">Salvar</ion-button>
+    </form>
+  </ion-card>
+
+  <ion-item lines="full">
+    <ion-label>
+      <h1>Notícias</h1>
+    </ion-label>
+  </ion-item>
+  <ion-item lines="none" *ngIf="news.length == 0 && !loadingNews">
+    <ion-label class="lbl-warning">
+      Não há notícias cadastradas
+    </ion-label>
+  </ion-item>
+  <div class="loading-container" *ngIf="loadingNews">
+    <div class="sk-chase">
+      <div class="sk-chase-dot"></div>
+      <div class="sk-chase-dot"></div>
+      <div class="sk-chase-dot"></div>
+      <div class="sk-chase-dot"></div>
+      <div class="sk-chase-dot"></div>
+      <div class="sk-chase-dot"></div>
+    </div>
+  </div>
+  <ion-list class="news-list">
+    <ion-item *ngFor="let n of news">
+      <ion-label>
+        <h2>{{n.title}}</h2>
+      </ion-label>
+      <ion-button fill="clear" (click)="edit(n)" slot="end">
+        Editar
+      </ion-button>
+      <ion-button fill="clear" slot="end" (click)="confirmDelete(n)">
+        Excluir
+      </ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>

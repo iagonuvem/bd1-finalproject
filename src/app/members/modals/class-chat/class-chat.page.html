@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>{{classData.class_name}} Chat</ion-title>
+    <!-- <ion-button (click)="dismissModal()" slot="end" fill="clear">
+    
+    </ion-button> -->
+    <ion-icon class="btn-dismiss" (click)="dismissModal()" slot="end" name="close"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-row *ngFor="let message of messages">
+
+    <ion-col size="9" *ngIf="message.name !== currentUser" class="message other-message">
+      <b>{{ message.name }}</b><br>
+      <span>{{ message.msg }}</span>
+      <div class="time ion-text-right"><br>{{ message.createdAt | date:'short' }}</div>
+    </ion-col>
+
+    <ion-col offset="3" size="9" *ngIf="message.name === currentUser" class="message my-message">
+      <b>{{ message.name }}</b><br>
+      <span>{{ message.msg }}</span>
+      <div class="time ion-text-right"><br>{{ message.createdAt | date:'short' }}</div>
+    </ion-col>
+
+  </ion-row>
+</ion-content>
+
+<ion-footer>
+  <ion-item>
+    <ion-input placeholder="Digite sua mensagem" slot="start" [(ngModel)]="msg"></ion-input>
+    <ion-button (click)="sendMessage()" slot="end">ENVIAR</ion-button>
+  </ion-item>
+</ion-footer>

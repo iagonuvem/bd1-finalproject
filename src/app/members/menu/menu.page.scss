@@ -1,0 +1,118 @@
+@keyframes crescendo {
+    0%   {transform: scale(.8);}
+    100% {transform: scale(1.2);}
+  }
+.width100{
+    width: 100%;
+}
+.bg-white{
+    background: white;
+}
+.bg-translucent{  
+        background-color: rgba(245,255,250,0.8);
+        color: black;
+        border-radius: 10px;
+        margin: 15px;
+}
+.logo{
+    text-align: center;
+    height: 20vh;
+}
+.arrow{
+    position: absolute;
+    top: 10vh;
+    left: 0vw;
+    height: 20vh;
+    width: 20vh;
+    animation: crescendo 1s alternate infinite ease-in;
+}
+.icon-swipe{
+    position: absolute;
+    bottom: 5vh;
+    left: 30vw;
+    height: 10vh;
+    animation: crescendo 1s alternate infinite ease-in;
+}
+.swipe-gif{
+    position: absolute;
+    bottom: 2vh;
+    left: 20vw;
+}
+.swipe-gif-top{
+    position: absolute;
+    top: 50vh;
+    left: 20vw;
+}
+.p-top{
+    position: absolute;
+    top: 8em;
+}
+
+.p-fix{
+    max-width: 92vw !important; 
+}
+
+
+
+ion-slides{
+    ion-slide{
+        align-items: start;
+		text-align: center;
+        flex-direction: column;
+        height: 100vh;
+    }
+    ion-slide:first-child {
+        width: 100%;
+        }
+    ion-img{
+        display: block;
+        max-width: 100vw;
+    }
+    .btn-skip{
+        width: 100vw;
+    }
+    h1{
+        font-weight: 100;
+        text-transform: uppercase;
+        font-size: 1.5em;
+        text-align: center;
+        color: var(--ion-color-primary);
+        width: 100vw;
+        padding: 0 1em 0;
+        margin: 0;
+    }
+    p{
+        font-size: 1.2em;
+        line-height: 1.3em;
+        max-width: 100vw;
+        padding: 0 1em;
+    }
+    
+}
+ion-toolbar{
+    padding: 1vh 0vh 1vh;
+}
+.nome{
+    padding: 10px 0px;
+    ion-label{
+        font-size: 18px;
+        font-weight: bold;
+    }
+}
+.gravatar{
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 5%;
+    width: 21vh;
+    height: 21vh;
+}
+.user-data{
+    ion-label{
+        text-align: center;
+        display: block;
+        margin-top: 5px;
+    }
+}
+.icons{
+    padding-right: 10px;
+}

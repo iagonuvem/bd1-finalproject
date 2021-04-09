@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Seed Premium - Parceiros</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <img class="ion-padding" src="{{partnerInfo.imgPath}}" />
+  <ion-row class="ion-padding">
+    <h1 class="partner-name">{{partnerInfo.name}}</h1>
+    <ion-item lines="full">
+      <ion-icon name="call" slot="start"></ion-icon>
+      <ion-label>{{partnerInfo.phone}}</ion-label>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-icon name="mail" slot="start"></ion-icon>
+      <ion-label>{{partnerInfo.email}}</ion-label>
+    </ion-item>
+  </ion-row>
+  <ion-row class="ion-padding padding-top-0">
+    <p>{{partnerInfo.description}}</p>
+  </ion-row>
+</ion-content>

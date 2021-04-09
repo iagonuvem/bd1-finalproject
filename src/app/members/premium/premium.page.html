@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Seed Premium</ion-title>
+    <ion-button (click)="UserQr()" class="color-white" fill="clear" slot="end">
+      <ion-icon name="qr-scanner"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <p class="desc">Parabéns! Como aluno Seed você faz parte de um clube exclusivo chamado Seed Premium, abaixo são selecionados os
+        melhores estabelecimentos, apresente o seu celular com o App aberto para receber seu benefício.</p>
+    </ion-row>
+    <ion-row>
+      <ion-col *ngFor="let p of partners" size="6">
+        <ion-card (click)="partner(p)">
+          <img src="{{p.imgPath}}" />
+          <ion-card-header>
+            <ion-card-title>{{p.name}}</ion-card-title>
+            <ion-card-subtitle>{{p.shortDescription}}</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

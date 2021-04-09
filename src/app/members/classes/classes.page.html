@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Minhas Turmas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-segment (ionChange)="classTypeChanged($event)" color="secondary">
+    <ion-segment-button value="progress" checked>
+      <ion-label>Em Andamento</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="concluded">
+      <ion-label>Concluídas</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  <!-- EM ANDAMENTO -->
+  <div *ngIf="activeClassType === 'progress'">
+    <ion-label class="default" *ngIf="noCurrentClass">Você não Possui turmas ativas!</ion-label>
+    <ion-card *ngIf="!noCurrentClass">
+      <ion-row>
+        <ion-label class="class-name">
+          {{currentClass['name']}}
+        </ion-label>
+      </ion-row>
+      <ion-row>
+        <ion-label class="teacher-name">{{currentClass['professor_name']}}</ion-label>
+      </ion-row>
+      <ion-row >
+        <ion-label class="ion-padding">Média Atual: {{(currentAvg*100).toFixed()}}%</ion-label>
+        <ion-label class="ion-padding">Situação: {{currentSituation}}</ion-label>
+      </ion-row>
+      <ion-row>
+        <span class="txt-members">Progresso da Turma({{(progress*100).toFixed()}}%)</span>
+        <ion-progress-bar value="{{progress}}"></ion-progress-bar>
+      </ion-row>
+      <ion-row>
+        <span class="txt-members">Presença nas aulas ({{(presence*100).toFixed()}}%)</span>
+        <ion-progress-bar value="{{presence}}"></ion-progress-bar>
+      </ion-row>
+      <ion-row>
+        <ion-label class="schedule" (click)="navigateClass(currentClass)">Mais detalhes   <ion-icon name="add"></ion-icon></ion-label>
+      </ion-row>
+    </ion-card>
+  </div>
+  
+  <!-- CONCLUIDAS -->
+  <div *ngIf="activeClassType === 'concluded'" class="bg">
+    <ion-label class="default" *ngIf="noConcludedClass">Você não Possui turmas concluidas!</ion-label>
+    <ion-card *ngFor="let c of classes">
+      <ion-item>
+        <ion-icon name="bookmarks" slot="start"></ion-icon>
+        <ion-label>{{c.name}} ({{c.semester}})</ion-label>
+        <ion-button (click)="navigateClass(c)" fill="outline" slot="end">Detalhes</ion-button>
+      </ion-item>
+    </ion-card>
+  </div>
+</ion-content>

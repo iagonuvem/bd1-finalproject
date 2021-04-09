@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>{{classData["name"]}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row>
+    <ion-label class="teacher-name">{{classData['professor_name']}}</ion-label>
+  </ion-row>
+  <ion-row>
+    <span class="txt-members">Membros da turma</span>
+    <ion-chip *ngFor="let m of members">
+      <ion-avatar>
+        <img src="/assets/img/icon_user-circle.png">
+      </ion-avatar>
+      <ion-label>{{m["name"]}}</ion-label>
+    </ion-chip>
+  </ion-row>
+  <ion-row>
+    <ion-label class="ion-padding">Cronograma de Aulas</ion-label>
+    <ion-list>
+      <ion-item *ngFor="let s of classData['lessons']">
+        <ion-label class="ion-text-wrap">
+          <h2 class="date-title">{{s.class_date | date : "dd/MM/y" }}</h2>
+          <p class="breadcrumb">{{s.description}}</p>
+          <ion-list radio-group [(ngModel)]="itemFamily" *ngIf="this.chooseTypeClicked === true"></ion-list>
+        </ion-label>
+        <ion-badge color="success" *ngIf="s.presence === 1">Presente</ion-badge>
+        <ion-badge color="danger" *ngIf="s.presence === 0">Ausente</ion-badge>
+      </ion-item>
+    </ion-list>
+  </ion-row>
+
+  <!-- fab placed to the bottom end -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button [disabled]="chatDisabled" (click)="modalChat()">
+      <ion-icon name="chatbubbles"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Seed News</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div class="loading-container" *ngIf="loading">
+      <div class="sk-chase">
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+        <div class="sk-chase-dot"></div>
+      </div>
+    </div>
+    <ion-label class="default" *ngIf="noNews">Você não Possui novas noticias!</ion-label>
+    <ion-card class="event-card" *ngFor="let n of news">
+      <img *ngIf="n.img" [src]="n.img" />
+      <ion-card-header>
+        <ion-card-title class="card-title">
+          <ion-label>
+            <h2>
+              {{n.title}}
+            </h2>
+            <p>
+              {{n.created_by.user_name}}<br>
+              {{n.relativeDate}}
+            </p>
+          </ion-label>
+        </ion-card-title>
+      </ion-card-header>
+    
+      <ion-card-content class="card-content">
+        <p>
+          {{n.short_desc}}
+        </p>
+      </ion-card-content>
+      <!-- <ion-item lines="full">
+        <ion-button expand="full" fill="clear" slot="start">
+          <ion-icon name="heart" slot="start"></ion-icon>
+          Curtir
+        </ion-button>
+        <ion-button expand="full" fill="clear" slot="end">
+          <ion-icon name="chatbubble" slot="start"></ion-icon>
+          Comentar
+        </ion-button>
+      </ion-item> -->
+    </ion-card>
+</ion-content>

@@ -1,0 +1,122 @@
+$fontColor: white;
+$bgPrimary: rgb(41, 183, 145);
+
+@function get-vw($target) { 
+    $vw-context: (1000*.01) * 1px;
+    @return ($target/$vw-context) * 1vw;
+}
+ion-header::after {
+    background-image: none;
+}
+ion-card{
+    background: $fontColor;
+}
+ion-slides {
+    --bullet-background: white;
+    --bullet-background-active: white;
+}
+
+//API INSTAGRAM
+
+ion-item{
+    border-radius: 5px;
+    margin-bottom: 5px;   
+}
+
+
+.tratar_img {
+    border-radius: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+   
+}
+
+
+//FINAL API INSTAGRAM
+
+
+.toolbar-container{
+    padding: 1em;
+}
+
+.home{
+    --background: rgb(41, 183, 145);
+}
+.logohome{
+    display: block;
+    margin-left: 4vh;
+    margin-right: auto;
+    margin-top: 3vh;
+    width: 34vh;
+}
+main{
+    background: transparent;
+}
+.bg-transparent{
+    --background: transparent;
+    ion-list{
+        background: transparent;
+        ion-item{
+            --background: transparent;
+            color: $fontColor;
+        }
+    }
+    label{
+        color: $fontColor;
+    }
+}
+
+.swiper-pagination{
+    .swiper-pagination-bullet-active{
+        background: white;
+    }
+}
+.slide-content{
+    .box{
+        padding: 1em;
+        margin: 1em 0.1em 2em 0em;
+        border-radius: 10px;
+        height: 45vh;
+        // border: 1px black solid;
+        background:rgba(234, 242, 255, 0.3);
+    }
+    main{
+        background: transparent !important;
+    }
+}
+.slide-content{
+    .news-card{
+        ion-label{
+            white-space: normal;
+        }
+    }
+}
+.slide-menu{
+    .box2{
+        padding: 10px;
+        border-radius: 10px;
+        height: 100px;
+        background:rgba(255, 255, 255, 0.2);
+    }
+}
+.icons{
+    color: #fff;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    
+}
+.box2text{
+    position: absolute;
+    color: #fff;
+    font-size: 1em;
+    bottom: 15px;
+    font: {
+        family: Arial, sans-serif;
+        weight: lighter;
+      }
+    text-align: center;    
+    }
+.swiper-container-horizontal{
+    bottom: 0 !important;
+}
