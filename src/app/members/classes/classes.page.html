@@ -3,7 +3,8 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Minhas Turmas</ion-title>
+    <ion-title *ngIf="!isCoordinator()">Minhas Turmas</ion-title>
+    <ion-title *ngIf="isCoordinator()">Turmas</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -33,14 +34,6 @@
         <ion-label class="ion-padding">Situação: {{currentSituation}}</ion-label>
       </ion-row>
       <ion-row>
-        <span class="txt-members">Progresso da Turma({{(progress*100).toFixed()}}%)</span>
-        <ion-progress-bar value="{{progress}}"></ion-progress-bar>
-      </ion-row>
-      <ion-row>
-        <span class="txt-members">Presença nas aulas ({{(presence*100).toFixed()}}%)</span>
-        <ion-progress-bar value="{{presence}}"></ion-progress-bar>
-      </ion-row>
-      <ion-row>
         <ion-label class="schedule" (click)="navigateClass(currentClass)">Mais detalhes   <ion-icon name="add"></ion-icon></ion-label>
       </ion-row>
     </ion-card>
@@ -48,7 +41,7 @@
   
   <!-- CONCLUIDAS -->
   <div *ngIf="activeClassType === 'concluded'" class="bg">
-    <ion-label class="default" *ngIf="noConcludedClass">Você não Possui turmas concluidas!</ion-label>
+    <ion-label class="default" *ngIf="noConcludedClass">Não Existem turmas concluidas!</ion-label>
     <ion-card *ngFor="let c of classes">
       <ion-item>
         <ion-icon name="bookmarks" slot="start"></ion-icon>

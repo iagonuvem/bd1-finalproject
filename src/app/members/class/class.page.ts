@@ -33,7 +33,7 @@ export class ClassPage implements OnInit {
       let getNav = this.router.getCurrentNavigation();
       if (getNav.extras) {
         this.classData = getNav.extras;
-        console.log(this.classData);
+        // console.log(this.classData);
         this.getClassChat(this.classData["class_id"]);
       } 
       else{
@@ -54,6 +54,12 @@ export class ClassPage implements OnInit {
       this.httpOptions)
     .pipe(map(res => res)
     ).subscribe(response => {
+      if(response["members"]){
+        this.classData["members"] = response["members"];
+      }
+      if(response["professor_name"]){
+        this.classData["professor_name"] = response["professor_name"];
+      }
       this.classData["chat"] = response["chat"];
       this.classData["_id"] = response["_id"];
       this.chatDisabled = false;
@@ -67,22 +73,9 @@ export class ClassPage implements OnInit {
    * @returns void
    */
   getMembers(members){
-    for(var i in members){
-      this.http.post(
-        this.server.protocol+this.server.host+this.server.port+"/users/getById", 
-        {
-          student_id: members[i]["student_id"]
-        }, 
-        this.httpOptions)
-      .pipe(map(res => res)
-      ).subscribe(response => {
-        // console.log(response);
-        var x = response["name"].toString().split(" ");
-        var formatedName = x[0]+" "+x[x.length-1];
-        this.members.push({"name": formatedName});
-      });
+    if(members.length > 0){
+      this.members = members;
     }
-    
   }
 
   async modalChat() {

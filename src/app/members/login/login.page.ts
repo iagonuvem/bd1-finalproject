@@ -49,10 +49,11 @@ export class LoginPage implements OnInit, OnDestroy, AfterViewInit {
     }
     let navigationExtras: NavigationExtras = {
       state: {
-        api_key: unit
+        api_key: unit,
+        userType: parseInt('2')
       }
     };
-    this.router.navigate(['login/user-type'], navigationExtras);
+    this.router.navigate(['login/authentication'], navigationExtras);
   }
   ngOnInit() {
     

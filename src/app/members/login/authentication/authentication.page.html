@@ -17,7 +17,7 @@
             </ion-item>
 
             <ion-item *ngIf="isStudent()">
-              <ion-input type="number" placeholder="Login" formControlName="student_id" [brmasker]="{len: '8', type:'num'}"></ion-input>
+              <ion-input type="text" placeholder="CPF" formControlName="student_id" [brmasker]="{person: true}"></ion-input>
             </ion-item>
             ​
             <ion-item>

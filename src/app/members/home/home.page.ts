@@ -136,6 +136,10 @@ export class HomePage implements OnInit, OnDestroy, AfterViewInit {
     
   }
 
+  isCoordinator(){
+    return (this.userData['coordinator'] != null || this.userData['coordinator'] != undefined);
+  }
+
   isStudent(){
     return (this.userData['access_type'] == 4);
   }

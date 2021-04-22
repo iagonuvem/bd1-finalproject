@@ -4,7 +4,6 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-img src="/assets/img/icon2.png" class="logohome"></ion-img>
-    <!-- <ion-title>Seed Idiomas</ion-title> -->
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding home">
@@ -18,18 +17,11 @@
 
     <ion-slide class="box">
       <ion-content class="bg-transparent">
-
-
-        <ion-item *ngFor="let feed of lista_feed" (click)="initInsta()">
-          <div *ngIf="feed.media_type == 'IMAGE'">
-            <img src="{{feed.media_url}}" class="tratar_img">
-          </div>
-          <div *ngIf="feed.media_type == 'VIDEO'">
-            <img src="{{feed.thumbnail_url}}" class="tratar_img">
-          </div>
-          <div *ngIf="feed.media_type == 'CAROUSEL_ALBUM'">
-            <img src="{{feed.media_url}}" class="tratar_img">
-          </div>
+        <ion-item>
+          <ion-label class="ion-text-wrap">Bem vindo ao School APP, {{userData['name']}}!</ion-label>
+        </ion-item>
+        <ion-item *ngIf="isCoordinator()">
+          <ion-label class="ion-text-wrap">Você é o coordenador do departamento: {{userData['coordinator'].department}}</ion-label>
         </ion-item>
 
       </ion-content>
@@ -71,55 +63,44 @@
   </ion-slides>
 
   <ion-slides class="slide-menu" [options]="slideOpts2">
-    <ion-slide (click)="navigate('news')" class="box2">
+    <!-- <ion-slide (click)="navigate('news')" class="box2">
       <ion-icon name="bookmarks" class="icons" size="large"></ion-icon>
-      <!--EDITAR CODIGO MENUSLIDE 1 AQUI-->
       <label class="box2text">
         Seed News
       </label>
-    </ion-slide>
-    <ion-slide *ngIf="isStudent()" (click)="navigate('exercises')" class="box2">
+    </ion-slide> -->
+    <!-- <ion-slide *ngIf="isStudent()" (click)="navigate('exercises')" class="box2">
       <ion-icon name="book" class="icons" size="large"></ion-icon>
-      <!--EDITAR CODIGO MENUSLIDE 1 AQUI-->
       <label class="box2text">
         Exercícios
       </label>
-    </ion-slide>
-    <ion-slide *ngIf="isStudent()" (click)="navigate('listening/albuns')" class="box2">
+    </ion-slide> -->
+    <!-- <ion-slide *ngIf="isStudent()" (click)="navigate('listening/albuns')" class="box2">
       <ion-icon name="headset" class="icons" size="large"></ion-icon>
       <label class="box2text">Listening</label>
-    </ion-slide>
+    </ion-slide> -->
     <!-- <ion-slide (click)="navigate('premium')" class="box2">
       <ion-icon name="star" class="icons" size="large"></ion-icon>
       <label class="box2text">Seed Premium</label>
     </ion-slide> -->
-    <ion-slide *ngIf="isStudent()" (click)="navigate('discount')" class="box2">
+    <!-- <ion-slide *ngIf="isStudent()" (click)="navigate('discount')" class="box2">
       <ion-icon name="gift" class="icons" size="large"></ion-icon>
       <label class="box2text">Indique um amigo</label>
-    </ion-slide>
-    <ion-slide *ngIf="isStudent() || isTeacher()" (click)="navigate('classes')" class="box2">
+    </ion-slide> -->
+    <ion-slide  (click)="navigate('classes')" class="box2">
       <ion-icon name="people" class="icons" size="large"></ion-icon>
-      <label class="box2text">Minhas Turmas</label>
+      <label class="box2text">
+        <span *ngIf="!isCoordinator()">Minhas</span> Turmas
+      </label>
     </ion-slide>
-    <ion-slide (click)="navigate('events')" class="box2">
+    <!-- <ion-slide (click)="navigate('events')" class="box2">
       <ion-icon name="ice-cream" class="icons" size="large"></ion-icon>
       <label class="box2text">Eventos</label>
-    </ion-slide>
-
+    </ion-slide> -->
     <!-- <ion-slide (click)="navigate('store')" class="box2">
       <ion-icon name="cart" class="icons" size="large"></ion-icon>
       <label class="box2text">SeedStore</label>
     </ion-slide> -->
-    <ion-slide (click)="navigate('tutoring')" class="box2">
-      <ion-icon name="school" class="icons" size="large"></ion-icon>
-      <!--EDITAR CODIGO MENUSLIDE 1 AQUI-->
-      <label class="box2text">
-        Ask Seed
-      </label>
-    </ion-slide>
-    <ion-slide *ngIf="isStudent()" (click)="navigate('financial')" class="box2">
-      <ion-icon name="card" class="icons" size="large"></ion-icon>
-      <label class="box2text">Financeiro</label>
-    </ion-slide>
+
   </ion-slides>
 </ion-content>

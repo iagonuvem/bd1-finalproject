@@ -53,51 +53,31 @@ export class ClassesPage implements OnInit {
         else{
           currentSemester = '2/'+currentYear.toString();
         }
-        for(var i in userData["registrations"]){
-          if(userData["registrations"][i].class_id != 0){
-            this.noConcludedClass = false;
-            this.http.post(
-              this.server.sponteURL+'classes', 
-              {
-                class_id: this.userData["registrations"][i].class_id
-              }, 
-              this.httpOptions)
-            .pipe(map(res => res)
-            ).subscribe(response => {
-              let currentLoop:any = response;
-              this.http.post(
-                this.server.sponteURL + 'lessons',
-                {
-                  class_id: response["class_id"],
-                  student_id: this.userData["student_id"],
-                  situation: 1
-                },
-                this.httpOptions)
-                .pipe(map(res => res)
-                ).subscribe(response => {
-                  currentLoop["lessons"] = response;
-                  if(currentLoop["semester"] == currentSemester){
-                    this.calcProgress();
-                    this.calcPresence();
-                    this.getStudentClassDetails();
-                  }
-                })  
-  
-              if(response["semester"] == currentSemester){
-                this.currentClass = response;
-                this.noCurrentClass = false;
-              }
-              else{
-                this.classes.push(currentLoop);
-              }
-            });
-          } 
-        }
+        this.currentClass = userData['registrations'][0];
+        this.getClassDetail(this.currentClass['class_id']);
+        this.noCurrentClass = false;
       });
     }
 
   ngOnInit() {
     
+  }
+
+  getClassDetail(class_id){
+    this.http.post(
+      this.server.protocol+this.server.host+this.server.port+"/classes/getById", 
+      {
+        class_id: class_id
+      }, 
+      this.httpOptions)
+    .pipe(map(res => res)
+    ).subscribe(response => {
+
+      if(response["professor_name"]){
+        this.currentClass["professor_name"] = response["professor_name"];
+      }
+
+    });
   }
 
   navigateClass(c){
@@ -107,6 +87,10 @@ export class ClassesPage implements OnInit {
   
   classTypeChanged(event){
     this.activeClassType = event.detail.value;
+  }
+
+  isCoordinator(){
+    return (this.userData['coordinator'] != null || this.userData['coordinator'] != undefined);
   }
 
   isTeacher(){

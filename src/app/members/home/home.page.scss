@@ -1,5 +1,5 @@
 $fontColor: white;
-$bgPrimary: rgb(41, 183, 145);
+$bgPrimary: var(--ion-color-primary);
 
 @function get-vw($target) { 
     $vw-context: (1000*.01) * 1px;
@@ -40,7 +40,7 @@ ion-item{
 }
 
 .home{
-    --background: rgb(41, 183, 145);
+    --background: var(--ion-color-primary);
 }
 .logohome{
     display: block;

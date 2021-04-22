@@ -1,5 +1,5 @@
 $fontColor: white;
-$bgPrimary: rgb(41, 183, 145);
+$bgPrimary: var(--ion-color-primary);
 $bgSecondary: rgb(100, 200, 180);
 
 ion-fab{
@@ -56,11 +56,11 @@ h2{
     padding: 3vh 1vh 1.5vh;
     font-size: 3vh;
     text-align: center;
-    background: rgb(41, 183, 145);
+    background: var(--ion-color-primary);
     color: $fontColor;
 }
 .teacher-name{
-    background: rgb(41, 183, 145);
+    background: var(--ion-color-primary);
     color: $fontColor;
     display: block;
     width: 100%;

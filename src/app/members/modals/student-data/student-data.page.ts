@@ -34,42 +34,14 @@ export class StudentDataPage implements OnInit {
       this.userData = userData;
 
       this.userForm = this.formBuilder.group({
-        name: new FormControl(this.userData["name"], Validators.required),
-        job: new FormControl(this.userData["job"]),
-        email: new FormControl(this.userData["email"], Validators.compose([
-          Validators.required,
-          Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
-        ])),
-        cell_phone: new FormControl(this.userData["cell_phone"], Validators.required),
-        home_phone: new FormControl(this.userData["home_phone"]),
-        zip_code: new FormControl(this.userData["zip_code"]),
-        address: new FormControl(this.userData["address"]),
-        number: new FormControl(this.userData["number"]),
-        district: new FormControl(this.userData["district"]),
-        city: new FormControl(this.userData["city"]),
-        cpf: new FormControl(this.userData["cpf"],Validators.required),
-        rg: new FormControl(this.userData["rg"])
+        name: new FormControl(this.userData["name"], Validators.required)
       });
     });
   }
 
   ngOnInit() {
     this.userForm = this.formBuilder.group({
-      name: new FormControl(this.userData["name"], Validators.required),
-      job: new FormControl(this.userData["job"]),
-      email: new FormControl(this.userData["email"], Validators.compose([
-        Validators.required,
-        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
-      ])),
-      cell_phone: new FormControl(this.userData["cell_phone"], Validators.required),
-      home_phone: new FormControl(this.userData["home_phone"]),
-      zip_code: new FormControl(this.userData["zip_code"]),
-      address: new FormControl(this.userData["address"]),
-      number: new FormControl(this.userData["number"]),
-      district: new FormControl(this.userData["district"]),
-      city: new FormControl(this.userData["city"]),
-      cpf: new FormControl(this.userData["cpf"],Validators.required),
-      rg: new FormControl(this.userData["rg"])
+      name: new FormControl(this.userData["name"], Validators.required)
     });
   }
 
@@ -96,16 +68,7 @@ export class StudentDataPage implements OnInit {
     await loading.present();
 
     this.userData["name"] = this.userForm.get("name").value;
-    this.userData["cpf"] = this.userForm.get("cpf").value;
-    this.userData["rg"] = this.userForm.get("rg").value;
-    this.userData["address"] = this.userForm.get("address").value;
-    this.userData["number"] = this.userForm.get("number").value;
-    this.userData["city"] = this.userForm.get("city").value;
-    this.userData["district"] = this.userForm.get("district").value;
-    this.userData["zip_code"] = this.userForm.get("zip_code").value;
-    this.userData["home_phone"] = this.userForm.get("home_phone").value;
-    this.userData["cell_phone"] = this.userForm.get("cell_phone").value;
-    this.userData["job"] = this.userForm.get("job").value;
+
 
     const httpOptions = {
       headers: new HttpHeaders({
@@ -119,19 +82,6 @@ export class StudentDataPage implements OnInit {
         "api_key": this.userData["api_key"],
         "student_id": this.userData["student_id"],
         "name": this.userForm.get("name").value,
-        "birthdate": this.userData["birthdate"],
-        "cpf": this.userForm.get("cpf").value,
-        "rg": this.userForm.get("rg").value,
-        "address": this.userForm.get("address").value,
-        "number": this.userForm.get("number").value,
-        "city": this.userForm.get("city").value,
-        "district": this.userForm.get("district").value,
-        "zip_code": this.userForm.get("zip_code").value,
-        "home_phone": this.userForm.get("home_phone").value,
-        "cell_phone": this.userForm.get("cell_phone").value,
-        "job": this.userForm.get("job").value,
-        "photo": this.userData["photo"],
-        "spontenet_password": this.userData["spontenet_password"]
       }, 
       httpOptions)
     .pipe(map(res => res)

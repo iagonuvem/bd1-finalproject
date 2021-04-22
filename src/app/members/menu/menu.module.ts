@@ -24,44 +24,8 @@ const routes: Routes = [
         loadChildren: './../classes/classes.module#ClassesPageModule'
       },
       {
-        path: 'listening',
-        loadChildren: './../listening/listening.module#ListeningPageModule'
-      },
-      {
-        path: 'exercises',
-        loadChildren: './../exercises/exercises.module#ExercisesPageModule'
-      },
-      {
-        path: 'events',
-        loadChildren: './../events/events.module#EventsPageModule'
-      },
-      {
-        path: 'financial',
-        loadChildren: './../financial/financial.module#FinancialPageModule'
-      },
-      {
-        path: 'store',
-        loadChildren: './../store/store.module#StorePageModule'
-      },
-      {
-        path: 'discount',
-        loadChildren: './../discount/discount.module#DiscountPageModule'
-      },
-      {
         path: 'class',
         loadChildren: './../class/class.module#ClassPageModule'
-      },
-      {
-        path: 'premium',
-        loadChildren: './../premium/premium.module#PremiumPageModule'
-      },
-      {
-        path: 'news',
-        loadChildren: './../news/news.module#NewsPageModule'
-      },
-      {
-        path: 'tutoring',
-        loadChildren: './../tutoring/tutoring.module#TutoringPageModule'
       }
     ]
   },
